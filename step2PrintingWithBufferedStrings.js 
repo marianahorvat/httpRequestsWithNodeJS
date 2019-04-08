@@ -8,9 +8,9 @@ function getAndPrintHTML () {
     path: '/http-examples/step2.html'
   };
 
-var myString;
 
 https.get(requestOptions, function (response) {
+var myString = '';
 
     // set encoding of received data to UTF-8
     response.setEncoding('utf8');
@@ -18,19 +18,17 @@ https.get(requestOptions, function (response) {
     // the callback is invoked when a `data` chunk is received
     response.on('data', function (data) {
       myString += data, '\n';
-
-
-      console.log('Chunk Received. Length:', myString, '\n');
     });
+
 
     // the callback is invoked when all of the data has been received
     // (the `end` of the stream)
     response.on('end', function() {
       console.log('Response stream complete.');
+      console.log('Chunk Received', myString, '\n');
     });
-
   /* Add your code here */
 });
 }
-console.log(getAndPrintHTML());
+getAndPrintHTML();
 
